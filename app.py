@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 
 app = Flask(__name__)
-regressor = pickle.load(open('rf_model.pkl', 'rb'))
+lr = pickle.load(open('finalized_linear_model.pkl', 'rb'))
 
 @app.route('/')
 def home():
@@ -16,7 +16,7 @@ def predict():
     '''
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
-    prediction = regressor.predict(final_features)
+    prediction = lr.predict(final_features)
 
     output = round(prediction[0], 2)
 
@@ -28,7 +28,7 @@ def predict_api():
     For direct API calls trought request
     '''
     data = request.get_json(force=True)
-    prediction = regressor.predict([np.array(list(data.values()))])
+    prediction = lr.predict([np.array(list(data.values()))])
 
     output = prediction[0]
     return jsonify(output)

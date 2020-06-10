@@ -23,3 +23,11 @@ Heroku app link -  https://flightpricepredictionapp.herokuapp.com/
 **5- Rebuilding the Model Post Outlier Removal: Feature Selection using Lasso and Ridge**
 
 **6- Removing Multicollinearity, Model Re-evaluation and Assumptions Validation**
+
+## OLS REGRESSION MODEL OUTPUT 
+
+![Alt Text](https://github.com/DheerajKumar97/Flight-Price-Prediction-Flask-Deployment--Heroku/blob/master/FPP%20Outout/OLS%20REGRESSION%201.jpg)
+
+## DEPLOYMENT OUTPUT 
+
+![Alt Text](https://github.com/DheerajKumar97/Flight-Price-Prediction-Flask-Deployment--Heroku/blob/master/FPP%20Outout/Screenshot%20(120).png)

@@ -132,7 +132,10 @@ fg = fg.drop(['Route'],axis=1)
 
 fg = fg.drop(['Duration'],axis=1)
 
+##########################################
 ''' [ Encoding Categorical Value ]'''
+##########################################
+from sklearn.preprocessing import LabelEncoder
 
 encoder=LabelEncoder()
 
@@ -156,8 +159,9 @@ fg["Route_5"] = fg["Route_5"].astype(str)
 
 fg["Route_5"]=encoder.fit_transform(fg['Route_5'])
 
+############################################
 ''' Outliers Detection and removal '''
-
+############################################
 def outlier(x):
     high=0
     q1 = x.quantile(.25)
@@ -240,7 +244,18 @@ x_test=x_test.drop(['Arrival_Minute'],axis=1)
 ''' Model Building '''
 #########################################################################################################
 
+############################################
+''' STATSMODEL OLS  '''
+############################################
+
+import statsmodels.api as sm
+model =sm.OLS(y_train,x_train).fit()
+
+model.summary()
+
+#############################################
 ''' LINEAR REGRESSION '''
+#############################################
 
 from sklearn.linear_model import LinearRegression
 
@@ -263,8 +278,9 @@ import pickle
 
 pickle.dump(lr,open('lr_model.pkl','wb'))
 
+##################################################
 ''' RANDOM FOREST '''
-
+##################################################
 from sklearn.ensemble import RandomForestRegressor
 
 regressor = RandomForestRegressor(n_estimators=100,random_state=42)
@@ -286,8 +302,9 @@ import pickle
 
 pickle.dump(regressor,open('rf_model.pkl','wb'))
 
+#####################################################
 ''' RANDOM FOREST CROSS VALIDATION '''
-
+#######################################################
 from sklearn.model_selection import RandomizedSearchCV
 
 n_estimators = [int(x) for x in np.linspace(start = 100, stop = 1200, num = 12)]
@@ -326,7 +343,9 @@ rf_Score = 100 - mape
 
 print(rf_Score)
 
+####################################################
 ''' XGBOOST '''
+####################################################
 
 from xgboost import XGBRegressor
 
@@ -345,7 +364,9 @@ from sklearn.metrics import r2_score
 
 r2_score(y_test, preds)
 
+#####################################################
 ''' XGBOOST CROSS VALIDATION '''
+#####################################################
 
 from sklearn.model_selection import GridSearchCV
 
